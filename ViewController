@@ -1,0 +1,45 @@
+--->>>> Header File
+#import "CAPSPageMenu.h"
+
+
+ var pageMenu : CAPSPageMenu!
+ 
+ 
+ var controllerArray : [UIViewController] = []
+            
+            let collectionVC = self.storyboard?.instantiateViewController(withIdentifier: "CollectionVC") as! CollectionVC
+            collectionVC.title = "Collection"
+            
+            let subscriptionVC = self.storyboard?.instantiateViewController(withIdentifier: "SubscriptionVC") as! SubscriptionVC
+            subscriptionVC.title = "Subscription"
+            
+            let donationVC = self.storyboard?.instantiateViewController(withIdentifier: "DonationVC") as! DonationVC
+            donationVC.title = "Donation"
+            
+            let twfVC = self.storyboard?.instantiateViewController(withIdentifier: "TWFVC") as! TWFVC
+            twfVC.title = "TWF"
+            
+            controllerArray.append(collectionVC)
+            controllerArray.append(subscriptionVC)
+            controllerArray.append(donationVC)
+            controllerArray.append(twfVC)
+            
+            let parameters : [AnyHashable:Any] = [
+                
+                CAPSPageMenuOptionMenuHeight : 50,
+                CAPSPageMenuOptionMenuItemSeparatorPercentageHeight : 0.0,
+                CAPSPageMenuOptionMenuItemWidth : 85.0,
+                CAPSPageMenuOptionScrollMenuBackgroundColor : UIColor.init(red: 3/255, green: 159/255, blue: 217/255, alpha: 1.0),
+                CAPSPageMenuOptionSelectedMenuItemLabelColor : UIColor.white,
+                CAPSPageMenuOptionUnselectedMenuItemLabelColor : UIColor.white,
+                CAPSPageMenuOptionSelectionIndicatorColor : UIColor.white,
+                CAPSPageMenuOptionMenuItemFont : UIFont.boldSystemFont(ofSize: 13)
+                
+            ]
+            
+            pageMenu = CAPSPageMenu.init(viewControllers: controllerArray, frame: CGRect.init(x:0.0 , y: 0.0, width: self.viewBG.frame.width, height: self.viewBG.frame.height), options: parameters)
+            
+            self.viewBG.addSubview(pageMenu!.view)
+            
+            self.addChildViewController(pageMenu!)
+            pageMenu?.didMove(toParentViewController: self)
